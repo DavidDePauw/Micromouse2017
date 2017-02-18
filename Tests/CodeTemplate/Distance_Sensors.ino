@@ -51,7 +51,7 @@ boolean rightWall (){
  * @return true if there is a wall on the front
  */
 boolean frontWall (){
-  double distanceToWall = MAZE_SIZE-BOT_SIZE;
+  double distanceToWall = MAZE_SIZE-BOT_SIZE/2;
   return (leftForwardDistance()<=distanceToWall && rightForwardDistance()<=distanceToWall);
 }
 
@@ -100,7 +100,7 @@ double leftForwardDistance (){
  * the distance from the curved part that intersects the line of sight from sensor 
  * of the bot to the obstacle is calculated
  * 
- * normal value 12 +/- 0.5
+ * very bad centering capability
  * 
  * @return the distance to nearest obstacle from the front (45 deg curved section) of the bot
  */
@@ -108,7 +108,7 @@ double leftDiagonalDistance (){
   double a = 16.74;
   double b = -0.3706;
   double c = -5.667;
-  double x = analogToVoltage(getDistanceAverageRead(left_diag, 10));
+  double x = analogToVoltage(getDistanceAverageRead(left_diag, 100));
 
   //d = a*x^b+c
   double distance = a*pow(x, b)+c;
@@ -122,7 +122,9 @@ double leftDiagonalDistance (){
  * the distance from the curved part that intersects the line of sight from sensor 
  * of the bot to the obstacle is calculated
  * 
- * normal value 12 +/- 0.5
+ * normal value 10.5 +/- 0.1
+ * reason why it is above the actual distance is because the 
+ * linearizing process was done when it was straight
  * 
  * @return the distance to nearest obstacle from the front (45 deg curved section) of the bot
  */
