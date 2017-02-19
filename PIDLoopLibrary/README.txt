@@ -1,0 +1,1 @@
+You will need to copy this folder into the library folder of you arduino ide files then restart the ide to use the library
