@@ -50,6 +50,14 @@ const double BOT_SIZE = 9.6;
 const double MAZE_SIZE = 16.7;
 
 
+//practise variables
+boolean calculateOnce = false;
+int rpm [100];
+int c = 0;
+
+
+double s = millis ();
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -58,16 +66,36 @@ void setup() {
   setupTPS();
   setupPID();
   Serial.begin(9600);
+  move(left_forward, 50);
+  
   
 }
 
 
 void loop() {
   // put your main code here, to run repeatedly:
-  delay(1000);
+  if (!calculateOnce){
+    if (c<100 && counter[left_forward] == 64){
+      rpm [c] = getRPM(left_forward);
+      c+=1;
+    }
+    if (millis()-s>2000){
+      stop(left_forward);
+      calculateOnce = true;
+    }
+  }
+  else{
+     print(); 
+  }
   
 }
 
+void print () {
+  for (int i=0; i<c; i++){
+    Serial.println(rpm[i]);
+  }
+  delay(1000);
+}
 
 
 

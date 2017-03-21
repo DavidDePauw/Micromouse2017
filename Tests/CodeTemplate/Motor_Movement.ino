@@ -8,3 +8,8 @@ void move (int pin, int analogValue){
   analogWrite (motor[pin], analogValue);
 }
 
+
+void stop (int pin){
+  analogWrite (motor[pin], 0);
+}
+
